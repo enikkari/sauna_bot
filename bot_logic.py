@@ -14,7 +14,7 @@ def _get_message(weeknumber):
     first_shift = W_GENDER if weeknumber % 2 == 0 else M_GENDER
     secondshift = M_GENDER if first_shift == W_GENDER else W_GENDER
 
-    message = f"@channel It's sauna day! Remember to turn on the sauna!\n\n" \
+    message = f"<!channel> It's sauna day! Remember to turn on the sauna!\n\n" \
               f"{first_shift} first (week {weeknumber}):\n\n" \
               f"{first_shift}'s sauna: 17-18:30\n" \
               f"{secondshift}'s sauna: 18:30-20:00\n" \
