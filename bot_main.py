@@ -2,7 +2,7 @@ import os
 import schedule, time
 import logging
 
-from bot_logic import send_message_to_slack
+from bot_logics.bot_logic import send_message_to_slack
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s %(name)s:%(lineno)d - %(message)s")
 logger = logging.getLogger(__name__)
@@ -23,6 +23,7 @@ def send_general_info():
 
 
 if __name__ == '__main__':
+    logger.info('Start slack scheduling')
     schedule.every().friday.at("12:12").do(send_general_info)
     schedule.every().friday.at("15:28").do(send_turn_on_sauna_message)
     while True:

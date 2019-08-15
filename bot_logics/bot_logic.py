@@ -1,4 +1,4 @@
-from call_apis import post_to_flowdock, post_to_slack
+from bot_logics.call_apis import post_to_slack
 import logging
 import datetime as dt
 import random
@@ -11,7 +11,7 @@ W_GENDER = "Women"
 M_GENDER = "Men"
 
 ping_message = "<!channel> It's sauna day! Remember to turn on the sauna!"
-nonping_message = "Today's sauna shifts are following:"
+nonping_message = "This Friday's sauna shifts are following:"
 
 
 def __get_nice_adjective() -> str:
@@ -33,18 +33,26 @@ def _get_message(weeknumber: int, ping_channel: bool):
 
     message = f"{ping_message if ping_channel else nonping_message}\n\n" \
               f"{first_shift} first (week {weeknumber}):\n\n" \
+              f"Turn on sauna: ~16:00\n" \
               f"{first_shift}'s sauna: 17-18:30\n" \
               f"{secondshift}'s sauna: 18:30-20:00\n" \
               f"Mixed: 20:00 -> (and all other times)" \
-              f"{'' if ping_channel else _get_inspirational_message()}"
+              f"{'' if ping_channel else _get_inspirational_message()}" \
+              f"\n\nCheck the sauna shifts anytime at https://saunabot.play.futurice.com/sauna\n" \
+              f"Check my source code at https://github.com/enikkari/sauna_bot"
     return message
+
+
+def _get_todays_message(ping_channel):
+    weeknumber = dt.datetime.today().isocalendar()[1]
+    return _get_message(weeknumber, ping_channel)
 
 
 def send_message_to_slack(token: str, channel_name: str, ping_channel: bool):
     weeknumber = dt.datetime.today().isocalendar()[1]
     logger.info(f'This is week {weeknumber}')
     try:
-        message = _get_message(weeknumber, ping_channel)
+        message = _get_todays_message(ping_channel)
 
         post_to_slack(token,
                       channel_name,
