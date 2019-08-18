@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 @app.route("/")
 def index():
-    return "Flask App!"
+    return sauna()
 
 
 @app.route("/foundation")
