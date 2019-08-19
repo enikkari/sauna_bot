@@ -3,8 +3,10 @@ from flask import Flask, render_template, request
 from bot_logics.bot_logic import _get_todays_message
 import re
 import logging
+from bot_logics.sauna_state_storage import Sauna
 
 app = Flask(__name__)
+sauna_state = Sauna()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s %(name)s:%(lineno)d - %(message)s")
 logger = logging.getLogger(__name__)
 
