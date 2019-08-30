@@ -14,9 +14,9 @@ def index():
     return sauna()
 
 
-@app.route("/foundation")
+@app.route("/refreshingsauna")
 def foundation():
-    return render_template('foundation.html')
+    return render_template('refreshingpage.html')
 
 
 @app.route("/sauna")
