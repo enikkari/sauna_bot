@@ -16,7 +16,7 @@ def index():
 
 @app.route("/refreshingsauna")
 def foundation():
-    return render_template('refreshingpage.html')
+    return render_template('refreshingpage.html', text=_get_todays_message(ping_channel=False))
 
 
 @app.route("/sauna")
