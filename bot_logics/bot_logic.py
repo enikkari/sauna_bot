@@ -6,7 +6,6 @@ import random
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s %(name)s:%(lineno)d - %(message)s")
 logger = logging.getLogger(__name__)
 
-
 W_GENDER = "Women"
 M_GENDER = "Men"
 
@@ -27,9 +26,14 @@ def _get_inspirational_message() -> str:
            f"Have {__get_nice_adjective()} Friday and weekend!"
 
 
-def _get_message(weeknumber: int, ping_channel: bool):
+def _get_shifts(weeknumber):
     first_shift = W_GENDER if weeknumber % 2 == 0 else M_GENDER
     secondshift = M_GENDER if first_shift == W_GENDER else W_GENDER
+    return first_shift, secondshift
+
+
+def _get_message(weeknumber: int, ping_channel: bool):
+    first_shift, secondshift = _get_shifts(weeknumber)
 
     message = f"{ping_message if ping_channel else nonping_message}\n\n" \
               f"{first_shift} first (week {weeknumber}):\n\n" \
@@ -43,9 +47,22 @@ def _get_message(weeknumber: int, ping_channel: bool):
     return message
 
 
+def _get_week_now():
+    return dt.datetime.today().isocalendar()[1]
+
+
 def _get_todays_message(ping_channel):
-    weeknumber = dt.datetime.today().isocalendar()[1]
+    weeknumber = _get_week_now()
     return _get_message(weeknumber, ping_channel)
+
+
+def get_this_week_params():
+    weeknumber = _get_week_now()
+    first_shift, secondshift = _get_shifts(weeknumber)
+    return {"first_shift": first_shift,
+            "second_shift": secondshift,
+            "weeknumber": weeknumber,
+            "inspiration": _get_inspirational_message()}
 
 
 def send_message_to_slack(token: str, channel_name: str, ping_channel: bool):
