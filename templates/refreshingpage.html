@@ -2,13 +2,16 @@
 <link rel="stylesheet" href="static/foundation/css/app.css" type="text/css" media="screen" charset="utf-8"/>
 <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 <meta http-equiv="refresh" content="3600">
+<style>
+    body {
+    background-color: #009f77;
+    font-family: Roboto;
+    font-size: xx-large;
+    color: 	white;
+}</style>
+
 {% block body %}
-
-<div class="block1">
-    <div class="grid-x grid-padding-x">
-        <div class="large-8 medium-8 cell">{{text}}</div>
-    </div>
+<div class="block1 grid-padding-x">
+        <div class="cell">{{text}}</div>
 </div>
-
-
 {% endblock %}

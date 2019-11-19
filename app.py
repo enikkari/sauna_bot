@@ -35,7 +35,7 @@ def foundation():
 
 @app.route("/sauna")
 def sauna():
-    return render_template('sauna.html', text=_get_todays_message(ping_channel=False))
+    return render_template('refreshingpage.html', text=_get_todays_message(ping_channel=False))
 
 
 if __name__ == "__main__":
