@@ -24,8 +24,8 @@ def send_general_info():
 
 if __name__ == '__main__':
     logger.info('Start slack scheduling')
-    schedule.every().friday.at("12:12").do(send_general_info)
-    schedule.every().friday.at("15:28").do(send_turn_on_sauna_message)
+    #schedule.every().friday.at("12:12").do(send_general_info)
+    #schedule.every().friday.at("15:28").do(send_turn_on_sauna_message)
     while True:
         schedule.run_pending()
         time.sleep(1)

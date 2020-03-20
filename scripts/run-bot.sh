@@ -8,8 +8,8 @@ echo "Container timezone set to: $CONTAINER_TIMEZONE"
 echo "start bot"
 source environment_vars.sh
 
-python bot_main.py &
-echo "start app"
+#python bot_main.py &
+#echo "start app"
 
 python app.py
 
